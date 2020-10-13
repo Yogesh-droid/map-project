@@ -14,15 +14,26 @@ class ConfirmInfo extends StatefulWidget {
   final String weight;
   final String length;
   final String frangible;
+  final String pickLocation;
+  final String dropLocation;
 
   ConfirmInfo(
-      this.height, this.width, this.weight, this.length, this.frangible);
+      this.height, this.width, this.weight, this.length, this.frangible,this.pickLocation, this.dropLocation);
 
   @override
-  _ConfirmInfoState createState() => _ConfirmInfoState();
+  _ConfirmInfoState createState() => _ConfirmInfoState(height,width,weight,length,frangible,pickLocation,dropLocation);
 }
 
 class _ConfirmInfoState extends State<ConfirmInfo> {
+  final String height;
+  final String width;
+  final String weight;
+  final String length;
+  final String frangible;
+  final String pickLocation;
+  final String dropLocation;
+
+  _ConfirmInfoState(this.height, this.width, this.weight, this.length, this.frangible, this.pickLocation, this.dropLocation);
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context);
@@ -51,7 +62,8 @@ class _ConfirmInfoState extends State<ConfirmInfo> {
                 ]),
               ),
               subtitle: Text(
-                '128 Mott St, New York, NY 10013, United States',
+                //'128 Mott St, New York, NY 10013, United States',
+                pickLocation,
                 style:
                     Theme.of(context).textTheme.bodyText1.copyWith(height: 1.5),
               ),
@@ -73,7 +85,8 @@ class _ConfirmInfoState extends State<ConfirmInfo> {
                 ]),
               ),
               subtitle: Text(
-                '2210 St. Merry Church, New York, NY 10013, United States',
+                //'2210 St. Merry Church, New York, NY 10013, United States',
+                dropLocation,
                 style:
                     Theme.of(context).textTheme.bodyText1.copyWith(height: 1.5),
               ),

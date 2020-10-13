@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddressField extends StatelessWidget {
+
   final String initialValue;
   final Widget icon;
   final BorderSide border;
@@ -25,6 +26,7 @@ class AddressField extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextFormField(
+      //controller: controller ??  TextEditingController(),
       style: TextStyle(color: theme.primaryColorDark),
       initialValue: initialValue ?? '',
       readOnly: readOnly ?? false,

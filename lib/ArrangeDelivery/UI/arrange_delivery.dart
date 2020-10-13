@@ -23,6 +23,10 @@ class ArrangeDeliveryBody extends StatefulWidget {
 }
 
 class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
+  final pickController=TextEditingController();
+  final dropController=TextEditingController();
+  String pickLocation;
+  String dropLocation;
   int currentIndex = 0;
   PageController _pageController;
 
@@ -172,15 +176,18 @@ class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
                           });
                         },
                         children: [
-                          buildPage(theme, locale, context, 'Pickup'),
-                          buildPage(theme, locale, context, 'Drop'),
+                          buildPage(theme, locale, context, 'Pickup',pickController),
+                          buildPage(theme, locale, context, 'Drop',dropController),
                           buildCourierInfo(theme, locale, context),
                           ConfirmInfo(
                               height.toInt().toString(),
                               width.toInt().toString(),
                               weight.toInt().toString(),
                               length.toInt().toString(),
-                              'No'),
+                              'No',
+                          pickController.text,
+                              /*dropController.text*/
+                          dropController.text),
                         ],
                       ),
                     ),
@@ -205,7 +212,7 @@ class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
   }
 
   Container buildPage(ThemeData theme, AppLocalizations locale,
-      BuildContext context, String page) {
+      BuildContext context, String page, TextEditingController _controller) {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -213,7 +220,7 @@ class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
       ),
       child: Column(
         children: [
-          Container(
+          /*Container(
             decoration: BoxDecoration(boxShadow: [boxShadow]),
             margin:
                 EdgeInsetsDirectional.only(top: 16.0, start: 16.0, end: 10.0),
@@ -225,11 +232,17 @@ class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
               ),
               hint: page == 'Pickup' ? locale.pickupHint : locale.dropHint,
             ),
-          ),
+          ),*/
           page == 'Pickup' ? SizedBox.shrink() : Spacer(),
           page == 'Pickup'
               ? Column(
                   children: [
+                    TextFormField(
+                      //controller: controller ??  TextEditingController(),
+                      style: TextStyle(color: theme.primaryColorDark),
+                      decoration: InputDecoration(labelText: 'pick'),
+                      controller: pickController,
+                    ),
                     Container(
                       decoration: BoxDecoration(
                         boxShadow: [boxShadow],
@@ -301,6 +314,12 @@ class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
                 )
               : Column(
                   children: [
+                    TextFormField(
+                      //controller: controller ??  TextEditingController(),
+                      style: TextStyle(color: theme.primaryColorDark),
+                      controller: dropController,
+                      decoration: InputDecoration(labelText: 'drop'),
+                    ),
                     Container(
                         decoration: BoxDecoration(
                           color: kButtonColor,
@@ -679,4 +698,5 @@ class _ArrangeDeliveryBodyState extends State<ArrangeDeliveryBody> {
       ),
     );
   }
+
 }
